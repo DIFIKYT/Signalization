@@ -10,25 +10,6 @@ public class Sound : MonoBehaviour
     private int _maxVolume = 1;
     private Coroutine _adjustVolumeCoroutine;
 
-    private IEnumerator AdjustVolumeCoroutine(int targetVolume)
-    {
-        while (_audioSource.volume != targetVolume)
-        {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _speed * Time.deltaTime);
-
-            yield return null;
-        }
-    }
-
-    private void AdjustVolume(int targetVolume)
-    {
-        if (_adjustVolumeCoroutine != null)
-            StopCoroutine(_adjustVolumeCoroutine);
-
-        _adjustVolumeCoroutine = StartCoroutine(AdjustVolumeCoroutine(targetVolume));
-
-    }
-
     public void TurnSound()
     {
         _audioSource.Play();
@@ -38,7 +19,26 @@ public class Sound : MonoBehaviour
     public void TurnOffSound()
     {
         AdjustVolume(_minVolume);
+    }
 
-        if (_audioSource.volume < _minVolume) _audioSource.Stop();
+    private IEnumerator AdjustVolumeCoroutine(int targetVolume)
+    {
+        while (_audioSource.volume != targetVolume)
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _speed * Time.deltaTime);
+
+            yield return null;
+        }
+
+        if (_audioSource.volume < _minVolume)
+            _audioSource.Stop();
+    }
+
+    private void AdjustVolume(int targetVolume)
+    {
+        if (_adjustVolumeCoroutine != null)
+            StopCoroutine(_adjustVolumeCoroutine);
+
+        _adjustVolumeCoroutine = StartCoroutine(AdjustVolumeCoroutine(targetVolume));
     }
 }
