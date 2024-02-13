@@ -8,41 +8,29 @@ public class Doors : MonoBehaviour
 
     [SerializeField] private Animator _animator;
 
-    private bool _hasCrook = false;
-     
-    public bool HasCrook => _hasCrook;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Crook>())
-            _hasCrook = true;
+            Open();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<Crook>())
-            _hasCrook = false;
+            Close();
     }
 
-    public void Open()
+    private void Open()
     {
         _animator.SetBool(CloseParameter, false);
         _animator.SetBool(OpenParameter, true);
         _animator.SetBool(IsOpenParameter, true);
     }
-
-    public void Close()
+     
+    private void Close()
     {
         _animator.SetBool(OpenParameter, false);
         _animator.SetBool(CloseParameter, true);
         _animator.SetBool(IsOpenParameter, false);
-    }
-
-    public void OpenOrCloseDoor()
-    {
-        if (_hasCrook == true)
-            Open();
-        else if (_hasCrook == false)
-            Close();
     }
 }

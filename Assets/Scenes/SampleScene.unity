@@ -1154,8 +1154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 830821a621db011439d05aeccef67ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doors: {fileID: 584915658}
-  _sound: {fileID: 1061079017}
 --- !u!50 &614590521
 Rigidbody2D:
   serializedVersion: 4
@@ -2374,9 +2372,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1061079016}
-  - component: {fileID: 1061079015}
   - component: {fileID: 1061079018}
   - component: {fileID: 1061079019}
+  - component: {fileID: 1061079015}
   - component: {fileID: 1061079017}
   m_Layer: 0
   m_Name: AlarmSystem
@@ -2509,7 +2507,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.1
-  _delay: 1
   _audioSource: {fileID: 1061079015}
 --- !u!61 &1061079018
 BoxCollider2D:
